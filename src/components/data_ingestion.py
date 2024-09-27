@@ -8,6 +8,8 @@ from sklearn.model_selection import train_test_split
 
 from dataclasses import dataclass
 
+from src.components.data_transformation import DataTransformation
+
 @dataclass
 class DataIngestionConfig:  #it is better to use @dataclass if you are only defining a variable, if you are planning to use any new function inside class better use dunder methods
     train_data_path:str = os.path.join('artifacts', "train.csv")
@@ -51,5 +53,7 @@ class DataIngestion:
 if __name__ == "__main__":
     obj = DataIngestion()
     train_data, test_data = obj.initiate_data_ingestion()
+    data_transformation = DataTransformation()
+    data_transformation.initialize_data_transformation(train_data, test_data)
     print(train_data, test_data)
 
